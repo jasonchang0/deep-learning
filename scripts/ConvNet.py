@@ -80,3 +80,10 @@ def train_neural_network(x):
 
 
 train_neural_network(x)
+
+
+
+
+
+
+
