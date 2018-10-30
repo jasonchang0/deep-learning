@@ -1,2 +1,5 @@
-./scripts/checkpoint
-./digit_reader.model
+/scripts/checkpoint
+/scripts/digit_reader.model
+/scripts/mnist/
+/training_and_test_data/
+/git_large_files/
