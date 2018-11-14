@@ -130,7 +130,7 @@ model.compile(loss='binary_crossentropy',
 Validation Accuracy -> Out-sample forecasting
 Training Accuracy -> In-sample forecasting
 '''
-model.fit(x, y, batch_size=64, epochs=50,
+model.fit(x, y, batch_size=64, epochs=10,
           validation_split=0.3, callbacks=[tensorboard])
 
 
