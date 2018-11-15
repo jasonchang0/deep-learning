@@ -18,8 +18,8 @@ df = utils.shuffle(df, random_state=None, n_samples=None)
 n_classes = 2
 batch_size = 128
 
-chunk_size = 251
-n_chunks = 2
+chunk_size = 502
+n_chunks = 1
 rnn_size = 512
 
 x = tf.placeholder('float', [None, n_chunks, chunk_size])
@@ -81,8 +81,9 @@ def train_neural_network(x):
     # OLD VERSION:
     # cost = tf.reduce_mean( tf.nn.softmax_cross_entropy_with_logits(prediction,y) )
     # NEW:
-    print(prediction.get_shape())
-    print(y.get_shape())
+
+    # print(prediction.get_shape())
+    # print(y.get_shape())
 
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))
     optimizer = tf.train.AdamOptimizer().minimize(cost)
@@ -98,7 +99,7 @@ def train_neural_network(x):
             epoch_loss = 0
             for _ in range(int(len(y_train) / batch_size)):
                 epoch_x, epoch_y = next_batch(x_train, y_train, _, batch_size)
-                epoch_x = epoch_x.reshape((batch_size, n_chunks, chunk_size))
+                epoch_x = epoch_x.reshape(batch_size, 1, chunk_size)
 
                 _, c = sess.run([optimizer, cost], feed_dict={x: epoch_x, y: epoch_y})
                 epoch_loss += c
@@ -108,7 +109,7 @@ def train_neural_network(x):
         correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
 
         accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
-        print('Accuracy:', accuracy.eval({x: x_test.reshape((-1, n_chunks, chunk_size)),
+        print('Accuracy:', accuracy.eval({x: x_test.reshape(-1, 1, chunk_size),
                                           y: y_test}))
 
 
