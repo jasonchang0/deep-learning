@@ -1,5 +1,11 @@
 /scripts/checkpoint
+/scripts/*.pickle
 /scripts/digit_reader.model
 /scripts/mnist/
+/scripts/logs/
 /training_and_test_data/
 /git_large_files/
+/data/
+/logs/
+/mnist/
+

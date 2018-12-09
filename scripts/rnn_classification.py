@@ -15,7 +15,7 @@ df = pd.read_csv(filepath_or_buffer=filename, compression='gzip')
 
 df = utils.shuffle(df, random_state=None, n_samples=None)
 
-hm_epochs = 10
+hm_epochs = 3
 n_classes = 2
 batch_size = 128
 
@@ -113,7 +113,7 @@ def train_neural_network(x):
 
         accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
         print('Accuracy:', accuracy.eval({x: np.array(x_test).reshape(-1, n_chunks, chunk_size),
-                                          y: np.array(y_test).reshape(batch_size, )}))
+                                          y: np.array(y_test).reshape(-1, batch_size)}))
 
 
 train_neural_network(x)
